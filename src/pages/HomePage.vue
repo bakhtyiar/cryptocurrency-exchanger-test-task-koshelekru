@@ -1,9 +1,12 @@
 <template>
-  <v-container>
-    MAINPAGEOOO
-  </v-container>
+  <div>
+    <the-header/>
+    <v-container>
+      MAINPAGEOOO
+    </v-container>
+  </div>
 </template>
 
-<script setup lang="ts">
-  //
+<script lang="ts" setup>
+//
 </script>
