@@ -6,7 +6,7 @@
                 label="Rows per page" variant="outlined"></v-select>
       <v-row class="flex-grow-1 h-75 ma-0">
         <v-col class="flex-grow-1 h-100 pl-0" cols="12" sm="6">
-          <v-data-table :fixed-header="true" :headers="headers" :items="bids"
+          <v-data-table-virtual :fixed-header="true" :headers="headers" :items="bids"
                         :items-per-page="itemsPerPage"
                         class="flex-grow-1 h-100" density="compact" item-key="id">
             <template v-slot:top>
@@ -17,10 +17,10 @@
             </template>
             <template v-slot:bottom>
             </template>
-          </v-data-table>
+          </v-data-table-virtual>
         </v-col>
         <v-col class="flex-grow-1 h-100 pl-0 pr-0" cols="12" sm="6">
-          <v-data-table :fixed-header="true" :headers="headers" :items="asks" :items-per-page="itemsPerPage"
+          <v-data-table-virtual :fixed-header="true" :headers="headers" :items="asks" :items-per-page="itemsPerPage"
                         class="flex-grow-1 h-100"
                         density="compact" item-key="id">
             <template v-slot:top>
@@ -31,7 +31,7 @@
             </template>
             <template v-slot:bottom>
             </template>
-          </v-data-table>
+          </v-data-table-virtual>
         </v-col>
       </v-row>
     </v-container>
