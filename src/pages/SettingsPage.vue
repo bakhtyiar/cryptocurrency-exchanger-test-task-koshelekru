@@ -5,11 +5,13 @@
         v-model="currencyStore.selectedPair"
         :items="currencyStore.pairs"
         label="Выберите валютную пару"
+        variant="outlined"
+        class="ma-4"
     ></v-select>
-    <div v-if="currencyStore.pairLog.length > 0">
+    <div v-if="currencyStore.pairLog.length > 0" class="ma-4">
       <h3>Лог изменений валютной пары</h3>
       <ul>
-        <li v-for="log in currencyStore.pairLog" :key="log.id">
+        <li v-for="log in currencyStore.pairLog" :key="log.id" class="no-bullets">
           Изменение с {{ log.from }} на {{ log.to }} - {{ log.timestamp }}
         </li>
       </ul>
@@ -31,19 +33,10 @@ watch(() => currencyStore.selectedPair, (newVal, oldVal) => {
     to: newVal,
     timestamp: timestamp
   });
-  // Вызов метода restapi для обновления данных в store
-  updateCurrencyData(newVal);
-  // Подключение по WebSocket для обновления данных по валютной паре
-  connectToWebSocket(newVal);
 })
-
-// Метод для обновления данных в store с использованием restapi
-function updateCurrencyData(newCurrencyPair) {
-  // Реализация обновления данных в store с использованием restapi
-}
-
-// Метод для подключения по WebSocket для обновления данных по валютной паре
-function connectToWebSocket(currencyPair) {
-  // Реализация подключения по WebSocket для обновления данных по валютной паре
-}
 </script>
+<style lang="scss">
+.no-bullets {
+  list-style-type: none;
+}
+</style>

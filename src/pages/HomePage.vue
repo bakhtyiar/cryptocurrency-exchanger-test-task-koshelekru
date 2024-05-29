@@ -1,9 +1,7 @@
 <template>
   <div>
     <the-header/>
-    <v-container>
-      MAINPAGEOOO
-    </v-container>
+    <div class="ma-4">Main page</div>
   </div>
 </template>
 
