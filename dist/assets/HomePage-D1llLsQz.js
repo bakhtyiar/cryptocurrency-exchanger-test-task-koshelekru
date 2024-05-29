@@ -1,1 +1,0 @@
-import{_ as a}from"./TheHeader.vue_vue_type_script_setup_true_lang-CkCWm0yI.js";import{d as o,c as t,a as s,b as n,o as c}from"./index-DVat0p2w.js";const _=n("div",{class:"ma-4"},"Main page",-1),l=o({__name:"HomePage",setup(r){return(m,p)=>{const e=a;return c(),t("div",null,[s(e),_])}}});export{l as default};
