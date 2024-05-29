@@ -10,6 +10,7 @@ import { fileURLToPath, URL } from 'node:url'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/cryptocurrency-exchanger-test-task-koshelekru/',
   plugins: [
     Vue({
       template: { transformAssetUrls },
