@@ -58,7 +58,6 @@ const baseOrderBookStore = () => {
     const currencyStore = useCurrencyStore();
     const {selectedPair} = storeToRefs(currencyStore);
     watch(selectedPair, async () => {
-        console.trace('watch selectedPair')
         if (initialized.value && !loading.value) {
             loading.value = true;
             await fetchData(toValue(amountLimit));
@@ -70,30 +69,24 @@ const baseOrderBookStore = () => {
     let loading = ref<boolean>(false);
 
     async function initialize() {
-        console.trace('initialize()')
         loading.value = true;
         await fetchData(toValue(amountLimit));
         initialized.value = true;
         loading.value = false;
     }
     async function fetchData(amountLimit: number) {
-        console.trace('fetchData()')
         updatesBuffer.value = [];
         currentProcessedEvent = undefined;
         loading.value = true;
         if (!wsocket || wsocket.readyState === wsocket.CLOSED) {
-            console.trace('*** 1')
             await subscribeToDiff();
         } else if (wsocket.readyState === wsocket.CLOSING) {
-            console.trace('*** 2')
             await waitForClosedConnection(wsocket)
             await subscribeToDiff();
         } else {
-            console.trace('*** 3')
             unsubscribeFromDiff();
             await subscribeToDiff();
         }
-        console.trace(wsocket)
         await waitForOpenConnection(wsocket);
         const snapshotREST = await getOrderBook(toValue(selectedPair), amountLimit);
         for (let key in orderBook) {
@@ -107,7 +100,6 @@ const baseOrderBookStore = () => {
     }
 
     async function subscribeToDiff() {
-        console.trace('subscribeToDiff()')
         wsocket = openWebsocketOrderBookDifferences(toValue(selectedPair));
         wsocket.onopen = async function open() {
             console.log('Opened diff depth orderBook stream.');
@@ -148,12 +140,8 @@ const baseOrderBookStore = () => {
     }
 
     function processBuffer() {
-        console.trace('processBuffer()')
         for (let i = 0; i < updatesBuffer.value.length; i++) {
-            console.log(`\tlastUpdateId.value=${lastUpdateId.value}`)
-            console.log(`\ti=${i} updatesBuffer.value.length=${updatesBuffer.value.length}`)
             if (!currentProcessedEvent && lastUpdateId.value && updatesBuffer.value[i].U <= lastUpdateId.value + 1 && lastUpdateId.value + 1 <= updatesBuffer.value[i].u) {
-                console.log('\tprocessBuffer **1')
                 currentProcessedEvent = updatesBuffer.value[i];
                 processUpdate(updatesBuffer.value[i])
                 if (0 < i) {
@@ -161,9 +149,7 @@ const baseOrderBookStore = () => {
                     i = 0;
                 }
             }
-            console.log('\tcurrentProcessedEvent', currentProcessedEvent)
             if (currentProcessedEvent && currentProcessedEvent.u + 1 === updatesBuffer.value[i].U) {
-                console.log('\tprocessBuffer **2')
                 currentProcessedEvent = updatesBuffer.value[i];
                 processUpdate(updatesBuffer.value[i])
                 if (0 < i) {
@@ -175,7 +161,6 @@ const baseOrderBookStore = () => {
     }
 
     function processUpdate(payload: IOrderBookUpdateRecord) {
-        console.trace('processUpdate()')
         let localBids = bids.value;
         payload.b.forEach(gotBid => {
             if (Number(gotBid[1]) == 0) {
