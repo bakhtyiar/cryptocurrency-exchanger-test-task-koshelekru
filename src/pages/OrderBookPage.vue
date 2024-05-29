@@ -2,13 +2,13 @@
   <div class="d-flex flex-column h-screen">
     <the-header/>
     <v-container class="flex-grow-1 h-0 pa-0">
-      <v-select v-model="itemsPerPage" :hide-details="true" :items="pageOptions" class="mt-4 ml-3 w-auto"
+      <v-select v-model="itemsPerPage" :hide-details="true" :items="pageOptions" class="mt-4 ml-0 w-auto"
                 label="Rows per page" variant="outlined"></v-select>
-      <v-row class="h-100 ma-0">
-        <v-col class="h-100 pl-0" cols="12" sm="6">
+      <v-row class="flex-grow-1 h-75 ma-0">
+        <v-col class="flex-grow-1 h-100 pl-0" cols="12" sm="6">
           <v-data-table :fixed-header="true" :headers="headers" :items="bids"
                         :items-per-page="itemsPerPage"
-                        class="h-100" density="compact" item-key="id">
+                        class="flex-grow-1 h-100" density="compact" item-key="id">
             <template v-slot:top>
               <v-toolbar class="d-flex align-center justify-space-between" flat>
                 <v-toolbar-title>Bids</v-toolbar-title>
@@ -19,9 +19,9 @@
             </template>
           </v-data-table>
         </v-col>
-        <v-col class="h-100 pl-0" cols="12" sm="6">
+        <v-col class="flex-grow-1 h-100 pl-0 pr-0" cols="12" sm="6">
           <v-data-table :fixed-header="true" :headers="headers" :items="asks" :items-per-page="itemsPerPage"
-                        class="h-100"
+                        class="flex-grow-1 h-100"
                         density="compact" item-key="id">
             <template v-slot:top>
               <v-toolbar flat>
